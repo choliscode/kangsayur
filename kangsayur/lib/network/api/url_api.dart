@@ -1,11 +1,12 @@
 class BASEURL {
-  static String urlApi = "http://192.168.18.168/sayurApp/api";
-  static String urlImages = "http://192.168.18.168/sayurApp/assets/images";
+  static String urlApi = "http://192.168.43.3/sayurApp/api";
+  static String urlImages = "http://192.168.43.3/sayurApp/assets/images";
   static String urlAuth = "$urlApi/auth";
   static String urlProduk = "$urlApi/produk";
   static String urlKeranjang = "$urlApi/cart";
   static String registrasi = "$urlAuth/registrasi.php";
   static String login = "$urlAuth/login.php";
+  static String profileCustomer = "$urlAuth/profile_customer.php?userID=";
   static String getProduk = "$urlProduk/getProduk.php";
   static String imageProduct = "$urlImages/produk/";
   static String imageCategory = "$urlImages/icon/";

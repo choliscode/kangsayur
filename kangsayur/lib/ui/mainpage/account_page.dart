@@ -1,8 +1,12 @@
+import 'dart:convert';
 
+import 'package:coba2/network/api/url_api.dart';
 import 'package:coba2/network/model/pref_model.dart';
+import 'package:coba2/network/model/user_model.dart';
 import 'package:coba2/ui/viewpage/login.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class AccountPages extends StatefulWidget {
   @override
@@ -10,14 +14,41 @@ class AccountPages extends StatefulWidget {
 }
 
 class _AccountPagesState extends State<AccountPages> {
+  List<UserModel> list = [];
+  var loading, id;
+
+  getPref() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      id = sharedPreferences.getString(PrefProfile.userID);
+    });
+    getProfile();
+  }
+
+  getProfile() async {
+    loading = true;
+    list.clear();
+    final response = await http.get(BASEURL.profileCustomer + id);
+    if (response.statusCode == 200) {
+      setState(() {
+        loading = false;
+        final data = jsonDecode(response.body);
+        for (Map i in data) {
+          list.add(UserModel.fromJson(i));
+        }
+      });
+    }
+  }
+
   Widget textField({@required String hintText, InputDecoration decoration}) {
     return Material(
-      elevation: 4,
+      elevation: 0,
       shadowColor: Colors.grey,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
+        enabled: false,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(
@@ -52,6 +83,14 @@ class _AccountPagesState extends State<AccountPages> {
   }
 
   @override
+  void initState() {
+    // ignore: todo
+    // TODO: implement initState
+    super.initState();
+    getPref();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -59,62 +98,71 @@ class _AccountPagesState extends State<AccountPages> {
         title: Text("Akun Saya"),
       ),
       body: ListView(
+        padding: EdgeInsets.all(16),
         children: [
           Container(
-            height: 380,
+            height: 350,
             width: double.infinity,
             margin: EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                textField(hintText: 'Username'),
-                textField(
-                  hintText: 'Password',
-                ),
-                textField(
-                  hintText: 'No.Telfon',
-                ),
-                textField(
-                  hintText: 'Alamat',
-                ),
-              ],
+            child: ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (context, i) {
+                final x = list[i];
+                return Card(
+                    child: Container(
+                        padding: EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Nama : " + x.nama),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text("No, Telp : " + x.phone),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text("Alamat : " + x.alamat),
+                          ],
+                        )));
+              },
             ),
           ),
-          Container(
-              height: 50,
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: RaisedButton(
-                textColor: Colors.white,
-                color: Colors.red,
-                child: Text('Keluar'),
-                onPressed: () {
-                  showDialog(
-                      barrierDismissible: false,
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            title: Text("Informasi ..."),
-                            content: Text("Apakah anda yakin ingin keluar ?"),
-                            actions: [
-                              FlatButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      Navigator.pop(context);
-                                    });
-                                  },
-                                  child: Text("Tidak")),
-                              FlatButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      signOut();
-                                    });
-                                  },
-                                  child: Text("Iya")),
-                            ],
-                          ));
-                },
-              )),
         ],
       ),
+      bottomNavigationBar: Container(
+          height: 45,
+          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: RaisedButton(
+            textColor: Colors.white,
+            color: Colors.red,
+            child: Text('Keluar'),
+            onPressed: () {
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) => AlertDialog(
+                        title: Text("Informasi ..."),
+                        content: Text("Apakah anda yakin ingin keluar ?"),
+                        actions: [
+                          FlatButton(
+                              onPressed: () {
+                                setState(() {
+                                  Navigator.pop(context);
+                                });
+                              },
+                              child: Text("Tidak")),
+                          FlatButton(
+                              onPressed: () {
+                                setState(() {
+                                  signOut();
+                                });
+                              },
+                              child: Text("Iya")),
+                        ],
+                      ));
+            },
+          )),
     );
   }
 }
