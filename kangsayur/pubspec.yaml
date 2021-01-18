@@ -32,10 +32,6 @@ dependencies:
   intl: ^0.16.1
   device_info: ^1.0.0
   shared_preferences: ^0.5.12+4
-<<<<<<< HEAD
-  image_picker:
-=======
->>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
 
 dev_dependencies:
   flutter_test:

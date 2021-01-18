@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:coba2/network/api/url_api.dart';
-import 'package:coba2/network/model/payment_model.dart';
-import 'package:coba2/ui/viewpage/choose_payment.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -18,8 +16,6 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   NumberFormat price = NumberFormat("#,##0", "EN_US");
-  TextEditingController payment = TextEditingController();
-  TextEditingController notes = TextEditingController();
   var loading;
   var deviceID;
   List<CartModel> cartModel = [];
@@ -123,54 +119,12 @@ class _CartPageState extends State<CartPage> {
   // getPref() async {
   //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   //   setState(() {
-
+      
   //   });
   // }
 
   Future<void> refresh() {
     return getdeviceInfo();
-  }
-
-
-  String paymentId;
-  PaymentAPI _paymentMethodModel;
-  choosePaymentMethod() async {
-    _paymentMethodModel = await Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ChoosePayment()));
-    setState(() {
-      payment = TextEditingController(text: _paymentMethodModel.paymentName);
-      paymentId = _paymentMethodModel.paymentId;
-    });
-  }
-
-  DateTime tgl = DateTime.now();
-  String pilihTanggal;
-
-  Future<Null> _selectDateStart(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: tgl,
-      firstDate: DateTime(1992),
-      lastDate: DateTime(2099),
-      builder: (BuildContext context, Widget child) {
-        return Theme(
-          data: ThemeData(
-            colorScheme: ColorScheme.fromSwatch(
-                primarySwatch: Colors.orange,
-                primaryColorDark: Colors.white,
-                accentColor: Colors.white),
-            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
-          ),
-          child: child,
-        );
-      },
-    );
-    if (picked != null && picked != tgl) {
-      setState(() {
-        tgl = picked;
-        pilihTanggal = DateFormat('yyyy-MM-dd').format(tgl);
-      });
-    } else {}
   }
 
   @override
@@ -179,7 +133,6 @@ class _CartPageState extends State<CartPage> {
     // TODO: implement initState
     super.initState();
     getdeviceInfo();
-    print(paymentId != null ? paymentId : "");
   }
 
   @override
@@ -199,13 +152,9 @@ class _CartPageState extends State<CartPage> {
             return RefreshIndicator(
               onRefresh: refresh,
               child: ListView(
-                physics: ClampingScrollPhysics(),
                 children: <Widget>[
-                  datePicker(),
                   createCartList(),
-                  chooseNotes(),
-                  choosePayment(),
-                ]
+                ],
               ),
             );
           },
@@ -213,104 +162,9 @@ class _CartPageState extends State<CartPage> {
         bottomNavigationBar: footer(context));
   }
 
-  choosePayment() {
-    return Container(
-      padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Pilih Metode Pembayaran"),
-          SizedBox(
-            height: 8,
-          ),
-          InkWell(
-            onTap: choosePaymentMethod,
-            child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(width: 0.5),
-                    borderRadius: BorderRadius.circular(5)),
-                height: 45,
-                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: TextField(
-                  controller: payment,
-                  decoration: InputDecoration(
-                      suffixIcon: Icon(Icons.payment),
-                      border: InputBorder.none,
-                      hintText: "Silahkan pilih metode pembayaran",
-                      hintStyle: TextStyle(color: Colors.black)),
-                  enabled: false,
-                )),
-          ),
-        ],
-      ),
-    );
-  }
-
-  chooseNotes() {
-    return Container(
-      padding: EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Tambahkan Catatan"),
-          SizedBox(
-            height: 8,
-          ),
-          Container(
-              decoration: BoxDecoration(
-                  border: Border.all(width: 0.5),
-                  borderRadius: BorderRadius.circular(5)),
-              height: 80,
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: TextField(
-                controller: notes,
-                maxLines: 5,
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Cth : Address, Notes, etc",
-                    hintStyle: TextStyle(color: Colors.black)),
-              )),
-        ],
-      ),
-    );
-  }
-
-  datePicker() {
-    return Container(
-      padding: EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Pilih Tanggal Pengiriman"),
-          SizedBox(
-            height: 8,
-          ),
-          InkWell(
-            onTap: (){
-              _selectDateStart(context);
-            },
-                      child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(width: 0.5),
-                    borderRadius: BorderRadius.circular(5)),
-                height: 45,
-                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: DateFormat('dd-MM-yyyy').format(tgl),
-                      hintStyle: TextStyle(color: Colors.black)),
-                  enabled: false,
-                )),
-          ),
-        ],
-      ),
-    );
-  }
-
   footer(BuildContext context) {
     return Container(
-      height: 150,
+      height: 100,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -381,11 +235,7 @@ class _CartPageState extends State<CartPage> {
         return Stack(
           children: <Widget>[
             Container(
-<<<<<<< HEAD
-              margin: EdgeInsets.only(left: 16, right: 16, top: 5),
-=======
               margin: EdgeInsets.only(left: 16, right: 16, top: 16),
->>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -393,11 +243,7 @@ class _CartPageState extends State<CartPage> {
                 children: <Widget>[
                   Container(
                     margin:
-<<<<<<< HEAD
-                        EdgeInsets.only(right: 8, left: 8, top: 0, bottom: 8),
-=======
                         EdgeInsets.only(right: 8, left: 8, top: 8, bottom: 8),
->>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
