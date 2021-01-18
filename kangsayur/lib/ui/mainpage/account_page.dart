@@ -84,7 +84,6 @@ class _AccountPagesState extends State<AccountPages> {
   }
 
   @override
-<<<<<<< HEAD
   void initState() {
     // ignore: todo
     // TODO: implement initState
@@ -195,63 +194,6 @@ class _AccountPagesState extends State<AccountPages> {
           height: 15,
         )
       ],
-=======
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Akun Saya"),
-      ),
-      body: ListView(
-        children: [
-          Container(
-            height: 380,
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                textField(hintText: 'Username'),
-                textField(
-                  hintText: 'Password',
-                ),
-                textField(
-                  hintText: 'No.Telfon',
-                ),
-                textField(
-                  hintText: 'Alamat',
-                ),
-              ],
-            ),
-          ),
-          Container(
-              height: 50,
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: RaisedButton(
-                textColor: Colors.white,
-                color: Colors.red,
-                child: Text('Keluar'),
-                onPressed: () {
-                  showDialog(
-                      barrierDismissible: false,
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            title: Text("Informasi ..."),
-                            content: Text("Apakah anda yakin ingin keluar ?"),
-                            actions: [
-                              FlatButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      signOut();
-                                    });
-                                  },
-                                  child: Text("Ok")),
-                            ],
-                          ));
-                },
-              )),
-        ],
-      ),
->>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
     );
   }
 }

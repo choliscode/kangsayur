@@ -68,10 +68,7 @@ class _DetailProdukState extends State<DetailProduk> {
       setState(() {
         // Navigator.pop(context);
         showDialog(
-<<<<<<< HEAD
-          barrierDismissible: false,
-=======
->>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
+            barrierDismissible: false,
             context: context,
             builder: (context) {
               return AlertDialog(
