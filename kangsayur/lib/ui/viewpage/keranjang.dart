@@ -381,11 +381,7 @@ class _CartPageState extends State<CartPage> {
         return Stack(
           children: <Widget>[
             Container(
-<<<<<<< HEAD
               margin: EdgeInsets.only(left: 16, right: 16, top: 5),
-=======
-              margin: EdgeInsets.only(left: 16, right: 16, top: 16),
->>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -393,11 +389,7 @@ class _CartPageState extends State<CartPage> {
                 children: <Widget>[
                   Container(
                     margin:
-<<<<<<< HEAD
                         EdgeInsets.only(right: 8, left: 8, top: 0, bottom: 8),
-=======
-                        EdgeInsets.only(right: 8, left: 8, top: 8, bottom: 8),
->>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(

@@ -1,13 +1,12 @@
 import 'dart:convert';
 
-import 'package:coba2/ui/viewpage/login.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
 import '../../network/api/url_api.dart';
 import '../../network/model/pref_model.dart';
 import '../../network/model/user_model.dart';
-import 'package:flutter/material.dart';
+import '../viewpage/login.dart';
 
 class AccountPages extends StatefulWidget {
   @override
