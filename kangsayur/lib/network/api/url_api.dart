@@ -1,6 +1,6 @@
 class BASEURL {
-  static String urlApi = "http://192.168.43.3/sayurApp/api";
-  static String urlImages = "http://192.168.43.3/sayurApp/assets/images";
+  static String urlApi = "http://192.168.43.246/sayurApp/api";
+  static String urlImages = "http://192.168.43.246/sayurApp/assets/images";
   static String urlAuth = "$urlApi/auth";
   static String urlProduk = "$urlApi/produk";
   static String urlKeranjang = "$urlApi/cart";
@@ -17,4 +17,5 @@ class BASEURL {
   static String totalCart = "$urlKeranjang/totalPriceCat.php?deviceID=";
   static String totalItem = "$urlKeranjang/totalItem.php?deviceID=";
   static String getcategoryproduct = "$urlProduk/getcategoryproduct.php";
+  static String getPayment = "http://bakmiapp.tanibersama.com/api/cart/choosePayment.php";
 }

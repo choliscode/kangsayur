@@ -9,7 +9,10 @@ class _OrderPagesState extends State<OrderPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
       appBar: AppBar(automaticallyImplyLeading: false,title: Text("Riwayat Pemesanan"),),
+=======
+>>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [

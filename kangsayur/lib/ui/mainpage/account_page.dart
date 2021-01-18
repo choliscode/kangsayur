@@ -1,12 +1,13 @@
 import 'dart:convert';
 
-import 'package:coba2/network/api/url_api.dart';
-import 'package:coba2/network/model/pref_model.dart';
-import 'package:coba2/network/model/user_model.dart';
 import 'package:coba2/ui/viewpage/login.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+
+import '../../network/api/url_api.dart';
+import '../../network/model/pref_model.dart';
+import '../../network/model/user_model.dart';
+import 'package:flutter/material.dart';
 
 class AccountPages extends StatefulWidget {
   @override
@@ -83,6 +84,7 @@ class _AccountPagesState extends State<AccountPages> {
   }
 
   @override
+<<<<<<< HEAD
   void initState() {
     // ignore: todo
     // TODO: implement initState
@@ -98,7 +100,7 @@ class _AccountPagesState extends State<AccountPages> {
         title: Text("Akun Saya"),
       ),
       body: ListView(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(20),
         children: [
           Container(
             height: 350,
@@ -108,61 +110,148 @@ class _AccountPagesState extends State<AccountPages> {
               itemCount: list.length,
               itemBuilder: (context, i) {
                 final x = list[i];
-                return Card(
-                    child: Container(
-                        padding: EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Nama : " + x.nama),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text("No, Telp : " + x.phone),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text("Alamat : " + x.alamat),
-                          ],
-                        )));
+                return Container(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                      containerProfile("Nama : ", x.nama),
+                      containerProfile("Phone : ", x.phone),
+                      containerProfile("Alamat : ", x.alamat),
+                    ]));
               },
             ),
           ),
         ],
       ),
       bottomNavigationBar: Container(
-          height: 45,
-          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: RaisedButton(
-            textColor: Colors.white,
-            color: Colors.red,
-            child: Text('Keluar'),
-            onPressed: () {
-              showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (context) => AlertDialog(
-                        title: Text("Informasi ..."),
-                        content: Text("Apakah anda yakin ingin keluar ?"),
-                        actions: [
-                          FlatButton(
-                              onPressed: () {
-                                setState(() {
-                                  Navigator.pop(context);
-                                });
-                              },
-                              child: Text("Tidak")),
-                          FlatButton(
-                              onPressed: () {
-                                setState(() {
-                                  signOut();
-                                });
-                              },
-                              child: Text("Iya")),
-                        ],
-                      ));
-            },
+          height: 55,
+          padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+          child: Container(
+            child: InkWell(
+              onTap: () {
+                showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          title: Text("Informasi ..."),
+                          content: Text("Apakah anda yakin ingin keluar ?"),
+                          actions: [
+                            FlatButton(
+                                onPressed: () {
+                                  setState(() {
+                                    Navigator.pop(context);
+                                  });
+                                },
+                                child: Text("Tidak")),
+                            FlatButton(
+                                onPressed: () {
+                                  setState(() {
+                                    signOut();
+                                  });
+                                },
+                                child: Text("Iya")),
+                          ],
+                        ));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.red,
+                ),
+                child: Center(child: Text('Keluar', style: TextStyle(color: Colors.white, fontSize: 16),)),
+              ),
+            ),
           )),
+    );
+  }
+
+  containerProfile(String title, subtitle) {
+    return Column(
+      children: [
+        Container(
+            padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
+            height: 75,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey[200]),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  subtitle,
+                  style: TextStyle(color: Colors.black, fontSize: 18),
+                ),
+              ],
+            )),
+        SizedBox(
+          height: 15,
+        )
+      ],
+=======
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Akun Saya"),
+      ),
+      body: ListView(
+        children: [
+          Container(
+            height: 380,
+            width: double.infinity,
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                textField(hintText: 'Username'),
+                textField(
+                  hintText: 'Password',
+                ),
+                textField(
+                  hintText: 'No.Telfon',
+                ),
+                textField(
+                  hintText: 'Alamat',
+                ),
+              ],
+            ),
+          ),
+          Container(
+              height: 50,
+              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: RaisedButton(
+                textColor: Colors.white,
+                color: Colors.red,
+                child: Text('Keluar'),
+                onPressed: () {
+                  showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: Text("Informasi ..."),
+                            content: Text("Apakah anda yakin ingin keluar ?"),
+                            actions: [
+                              FlatButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      signOut();
+                                    });
+                                  },
+                                  child: Text("Ok")),
+                            ],
+                          ));
+                },
+              )),
+        ],
+      ),
+>>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
     );
   }
 }

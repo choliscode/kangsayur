@@ -73,8 +73,12 @@ class _MainPagesState extends State<MainPages> {
                 color: Colors.green,
               ),
             ),
+<<<<<<< HEAD
             // ignore: deprecated_member_use
             title: Text("Home"),
+=======
+            label: "Home",
+>>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
           ),
           BottomNavigationBarItem(
             icon: GestureDetector(
@@ -88,8 +92,12 @@ class _MainPagesState extends State<MainPages> {
                 color: Colors.green,
               ),
             ),
+<<<<<<< HEAD
             // ignore: deprecated_member_use
             title: Text("Pemesanan"),
+=======
+            label: "Pemesanan",
+>>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
           ),
           BottomNavigationBarItem(
             icon: GestureDetector(
@@ -103,8 +111,12 @@ class _MainPagesState extends State<MainPages> {
                 color: Colors.green,
               ),
             ),
+<<<<<<< HEAD
             // ignore: deprecated_member_use
             title: Text("Profile"),
+=======
+            label: "Profil",
+>>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
           ),
         ],
       ),

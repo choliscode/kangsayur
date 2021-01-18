@@ -118,7 +118,10 @@ class _HomepageState extends State<Homepage> {
     // disini juga bisa tapi lebih baik setelah class ke 2
     return Scaffold(
         appBar: AppBar(
-            automaticallyImplyLeading: false,
+<<<<<<< HEAD
+          automaticallyImplyLeading: false,
+=======
+>>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
             title: Text(
               'Selamat Datang',
             ),
@@ -256,7 +259,11 @@ class _HomepageState extends State<Homepage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Image.network(
+<<<<<<< HEAD
                                   BASEURL.imageProduct + x.gambar,
+=======
+                                  'https://www.pngitem.com/pimgs/m/173-1738766_burger-king-menu-double-cheeseburger-png-download-food.png',
+>>>>>>> 39d07bdcb9a1a31194ce646fdb299ed3b7371a9f
                                   height: 100,
                                   width: 100,
                                   fit: BoxFit.cover,
